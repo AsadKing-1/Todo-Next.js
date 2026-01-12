@@ -1,0 +1,25 @@
+@import "tailwindcss";
+:root {
+  --primary: #137fec;
+  --background: #f6f7f8;
+  --background-dark: #101922;
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  --font-display: "Inter", sans-serif;
+}
+.dark {
+  --background: var(--background-dark);
+}
+@theme {
+  --color-primary: var(--primary);
+  --color-background: var(--background);
+
+
+  --radius-default: var(--radius);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --font-display: var(--font-display);
+}
