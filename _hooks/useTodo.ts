@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 import type { Todo } from "@/_types/todo";
 
+import { AddTodoPayload } from "@/_types/todo";
+
 const KEY = "todos";
 
 export function useTodos() {
   const [taskStorage, setTaskStorage] = useState<Todo[]>([]);
 
-  const [isOpenModal, setOpenModal] = useState<boolean>(true);
-
+  const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
   const totalTaskLength = taskStorage.length;
   const completedLength = taskStorage.filter((t) => t.completed).length;
@@ -35,14 +36,14 @@ export function useTodos() {
     localStorage.setItem(KEY, JSON.stringify(taskStorage));
   }, [taskStorage]);
 
-  function addTodo(title: string) {
+  function addTodo({ title, description, dueDate, priority }: AddTodoPayload) {
     setTaskStorage((prev) => [
       {
         id: crypto.randomUUID(),
         title,
         completed: false,
         status: "active",
-        priority: "medium",
+        priority,
         createdAt: Date.now(),
       },
       ...prev,

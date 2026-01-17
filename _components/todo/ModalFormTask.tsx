@@ -17,7 +17,7 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
             onClick={() => onClose(false)}
         >
             <div
-                className="bg-white rounded-lg p-6 min-w-75"
+                className="bg-white rounded-lg p-6 min-w-75 lg:min-w-100"
                 onClick={(e) => e.stopPropagation()}
             >
                 {children}

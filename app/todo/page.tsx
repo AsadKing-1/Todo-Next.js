@@ -27,7 +27,7 @@ export default function TodoPage() {
             <Modal
                 isOpen={todos.isOpenModal}
                 onClose={todos.setOpenModal}>
-                <TodoFormTask />
+                <TodoFormTask  />
             </Modal>
         </div>
     )
