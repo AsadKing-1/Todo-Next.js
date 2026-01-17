@@ -8,6 +8,9 @@ const KEY = "todos";
 export function useTodos() {
   const [taskStorage, setTaskStorage] = useState<Todo[]>([]);
 
+  const [isOpenModal, setOpenModal] = useState<boolean>(true);
+
+
   const totalTaskLength = taskStorage.length;
   const completedLength = taskStorage.filter((t) => t.completed).length;
   const progressTask =
@@ -18,7 +21,7 @@ export function useTodos() {
   const HighPriorityTasks = taskStorage.filter((t) => t.priority === "high");
   const LowPriorityTasks = taskStorage.filter((t) => t.priority === "low");
   const MediumPriorityTasks = taskStorage.filter(
-    (t) => t.priority === "medium"
+    (t) => t.priority === "medium",
   );
 
   useEffect(() => {
@@ -47,6 +50,8 @@ export function useTodos() {
   }
 
   return {
+    isOpenModal,
+    setOpenModal,
     taskStorage,
     addTodo,
     completedLength,
