@@ -8,7 +8,7 @@ interface SwitchProps {
 
 export function PrioritySwitch({ value, setValue }: SwitchProps) {
     return (
-        <div className="inline-flex rounded-xl w-full mt-3 bg-gray-100 p-1">
+        <div className="inline-flex rounded-xl w-full bg-gray-100 p-0.5">
             {(["low", "medium", "high"] as Priority[]).map((p) => (
                 <button
                     key={p}

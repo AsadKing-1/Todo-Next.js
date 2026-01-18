@@ -19,10 +19,14 @@ export function useTodos() {
       ? 0
       : Math.round((completedLength / totalTaskLength) * 100);
 
-  const HighPriorityTasks = taskStorage.filter((t) => t.priority === "high");
-  const LowPriorityTasks = taskStorage.filter((t) => t.priority === "low");
+  const HighPriorityTasks = taskStorage.filter(
+    (t) => t.priority === "high" && !t.completed,
+  );
+  const LowPriorityTasks = taskStorage.filter(
+    (t) => t.priority === "low" && !t.completed,
+  );
   const MediumPriorityTasks = taskStorage.filter(
-    (t) => t.priority === "medium",
+    (t) => t.priority === "medium" && !t.completed,
   );
 
   useEffect(() => {
@@ -36,7 +40,7 @@ export function useTodos() {
     localStorage.setItem(KEY, JSON.stringify(taskStorage));
   }, [taskStorage]);
 
-  function addTodo({ title, description, dueDate, priority }: AddTodoPayload) {
+  function addTodo({ title, priority }: AddTodoPayload) {
     setTaskStorage((prev) => [
       {
         id: crypto.randomUUID(),
@@ -50,11 +54,26 @@ export function useTodos() {
     ]);
   }
 
+  function completeTodo(id: string) {
+    setTaskStorage((prev) =>
+      prev.map((todo) =>
+        todo.id === id
+          ? {
+              ...todo,
+              completed: true,
+              status: "completed",
+            }
+          : todo,
+      ),
+    );
+  }
+
   return {
     isOpenModal,
     setOpenModal,
     taskStorage,
     addTodo,
+    completeTodo,
     completedLength,
     progressTask,
     totalTaskLength,
